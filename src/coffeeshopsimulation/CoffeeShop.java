@@ -21,10 +21,12 @@ public class CoffeeShop {
     private double currentTime = 0;
     private double serviceTime = 3;
     private int numberOfCustomers;
+    private double arrivalInterval;
     
-    public CoffeeShop(double serviceTime, int numberOfCustomers) {
+    public CoffeeShop(double serviceTime, int numberOfCustomers, double arrivalInterval) {
     	this.serviceTime = serviceTime;
     	this.numberOfCustomers = numberOfCustomers;
+    	this.arrivalInterval = arrivalInterval;
     	customerQueue = new PriorityQueue<>((a, b) -> a.getPriority() - b.getPriority());
         cashier = new Cashier(1);
         barista = new Barista(1);
@@ -33,7 +35,7 @@ public class CoffeeShop {
     public void startSimulation() {
 
     	for (int i = 1; i <= numberOfCustomers; i++) {
-    	    double arrivalTime = i - 1;
+    		double arrivalTime = (i - 1) * arrivalInterval;
     	    int priority = ((i - 1) % 3) + 1;
 
     	    Customer customer = new Customer(i, arrivalTime, priority);
@@ -93,13 +95,16 @@ public class CoffeeShop {
         try (FileWriter writer = new FileWriter("simulation_results.csv", true)) {
         	
         	if (newFile) {
-        	    writer.write("Date_Time,Number_of_Customers,Service_Time,Customers_Served,Average_Waiting_Time,Maximum_Waiting_Time\n");
+        	    writer.write("Date_Time,Number_of_Customers,Service_Time,Arrival_Interval,Customers_Served,Average_Waiting_Time,Maximum_Waiting_Time\n");
         	}
             writer.write(
                     LocalDateTime.now() + "," +
                     numberOfCustomers + "," +
                     serviceTime + "," +
+                    arrivalInterval + "," +
+                    
                     customersServed + "," +
+     
                     averageWaitingTime + "," +
                     maximumWaitingTime + "\n"
             );
