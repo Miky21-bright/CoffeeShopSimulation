@@ -6,8 +6,16 @@ public class Main {
 
     	CoffeeShop coffeeShop = new CoffeeShop(2.0, 10, 3.0);
 
-        coffeeShop.startSimulation();
-        coffeeShop.generateReport();
-        coffeeShop.exportToCSV();
+    	long startTime = System.nanoTime();
+
+    	coffeeShop.startSimulation();
+
+    	long endTime = System.nanoTime();
+    	double executionTimeMs = (endTime - startTime) / 1_000_000.0;
+
+    	coffeeShop.generateReport();
+    	coffeeShop.exportToCSV(executionTimeMs);
+
+    	System.out.println("Execution Time: " + executionTimeMs + " ms");
     }
 }
