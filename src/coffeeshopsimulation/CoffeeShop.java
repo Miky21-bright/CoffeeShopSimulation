@@ -2,6 +2,9 @@ package coffeeshopsimulation;
 
 import java.util.PriorityQueue;
 import java.util.Queue;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.LocalDateTime;
 
 
 
@@ -79,4 +82,32 @@ public class CoffeeShop {
         
         System.out.println("Simulation Complete");
     }
+    public void exportToCSV() {
+        double averageWaitingTime = customersServed > 0
+                ? totalWaitingTime / customersServed
+                : 0;
+        java.io.File file = new java.io.File("simulation_results.csv");
+        boolean newFile = !file.exists() || file.length() == 0;
+      
+          
+        try (FileWriter writer = new FileWriter("simulation_results.csv", true)) {
+        	
+        	if (newFile) {
+        	    writer.write("Date_Time,Number_of_Customers,Service_Time,Customers_Served,Average_Waiting_Time,Maximum_Waiting_Time\n");
+        	}
+            writer.write(
+                    LocalDateTime.now() + "," +
+                    numberOfCustomers + "," +
+                    serviceTime + "," +
+                    customersServed + "," +
+                    averageWaitingTime + "," +
+                    maximumWaitingTime + "\n"
+            );
+
+            System.out.println("Results exported to simulation_results.csv");
+
+        } catch (IOException e) {
+            System.out.println("Error exporting results: " + e.getMessage());
+        }
+    }  
 }

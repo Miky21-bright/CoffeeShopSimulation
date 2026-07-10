@@ -8,5 +8,6 @@ public class Main {
 
         coffeeShop.startSimulation();
         coffeeShop.generateReport();
+        coffeeShop.exportToCSV();
     }
 }
