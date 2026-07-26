@@ -38,10 +38,10 @@ public class Customer {
     }
 
     public void placeOrder() {
-        System.out.println("Customer " + customerID + " placed an order.");
+       // System.out.println("Customer " + customerID + " placed an order.");
     }
 
     public void leaveShop() {
-        System.out.println("Customer " + customerID + " left the shop.");
+        //System.out.println("Customer " + customerID + " left the shop.");
     }
 }

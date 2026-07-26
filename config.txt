@@ -1,0 +1,4 @@
+numberOfCustomers= 10
+serviceTime= 2.0
+arrivalInterval= 4.0
+randomSeed=100

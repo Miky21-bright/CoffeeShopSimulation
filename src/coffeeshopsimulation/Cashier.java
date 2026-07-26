@@ -12,9 +12,8 @@ public class Cashier {
     }
 
     public void takeOrder(Customer customer) {
-        System.out.println("Cashier " + cashierID +
-                " takes order from Customer " +
-                customer.getCustomerID());
+     //System.out.println("Cashier " + cashierID + " takes order from Customer " +
+               // customer.getCustomerID());
     }
 
     public boolean isAvailable() {

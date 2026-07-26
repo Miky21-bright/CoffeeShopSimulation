@@ -1,21 +1,35 @@
 package coffeeshopsimulation;
-
+import java.io.FileInputStream;
+import java.util.Properties;
 public class Main {
 
     public static void main(String[] args) {
+    	try {
+    	    Properties config = new Properties();
+    	    config.load(new FileInputStream("config.txt"));
 
-    	CoffeeShop coffeeShop = new CoffeeShop(2.0, 10, 3.0);
+    	    int numberOfCustomers = Integer.parseInt(config.getProperty("numberOfCustomers"));
+    	    double serviceTime = Double.parseDouble(config.getProperty("serviceTime"));
+    	    double arrivalInterval = Double.parseDouble(config.getProperty("arrivalInterval"));
 
-    	long startTime = System.nanoTime();
+    	    CoffeeShop coffeeShop = new CoffeeShop(serviceTime, numberOfCustomers, arrivalInterval);
 
-    	coffeeShop.startSimulation();
+    	    long startTime = System.nanoTime();
 
-    	long endTime = System.nanoTime();
-    	double executionTimeMs = (endTime - startTime) / 1_000_000.0;
+    	    coffeeShop.startSimulation();
 
-    	coffeeShop.generateReport();
-    	coffeeShop.exportToCSV(executionTimeMs);
+    	    long endTime = System.nanoTime();
+    	    double executionTimeMs = (endTime - startTime) / 1_000_000.0;
 
-    	System.out.println("Execution Time: " + executionTimeMs + " ms");
+    	    coffeeShop.generateReport();
+    	    coffeeShop.exportToCSV(executionTimeMs);
+
+    	    System.out.println("Execution Time: " + executionTimeMs + " ms");
+
+    	} catch (Exception e) {
+    	    e.printStackTrace();
+    	}
+    	
+    	
     }
 }

@@ -12,10 +12,9 @@ public class Barista {
     }
 
     public void prepareDrink(Order order) {
-        System.out.println("Barista " + baristaID +
-                " prepares drink for Order " +
-                order.getOrderID());
-        order.completeOrder();
+    //System.out.println("Barista " + baristaID + " prepares drink for Order " +
+                //order.getOrderID());
+        //order.completeOrder();
     }
 
     public boolean isAvailable() {
